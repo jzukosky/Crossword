@@ -82,20 +82,10 @@
                                     <constraint firstAttribute="width" secondItem="LeM-3t-EW0" secondAttribute="height" multiplier="1:1" id="GIS-t8-Bro"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYg-fl-5gA">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="CYg-fl-5gA" secondAttribute="height" multiplier="1:1" id="cts-2D-WKc"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="CYg-fl-5gA" firstAttribute="top" secondItem="CDn-UB-jIZ" secondAttribute="top" id="Hdk-mL-HIi"/>
                             <constraint firstItem="LeM-3t-EW0" firstAttribute="top" secondItem="CDn-UB-jIZ" secondAttribute="top" id="Hw9-pf-Htp"/>
-                            <constraint firstItem="CYg-fl-5gA" firstAttribute="trailing" secondItem="CDn-UB-jIZ" secondAttribute="trailing" id="SNA-li-R2F"/>
-                            <constraint firstItem="CYg-fl-5gA" firstAttribute="leading" secondItem="CDn-UB-jIZ" secondAttribute="leading" id="XAN-LN-kkg"/>
                             <constraint firstItem="LeM-3t-EW0" firstAttribute="leading" secondItem="CDn-UB-jIZ" secondAttribute="leading" id="aon-EL-fEg"/>
                             <constraint firstItem="LeM-3t-EW0" firstAttribute="trailing" secondItem="CDn-UB-jIZ" secondAttribute="trailing" id="cJI-1Q-8xJ"/>
                         </constraints>
@@ -104,7 +94,6 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Title" id="CZE-E0-Ote"/>
                     <connections>
-                        <outlet property="containerContainerView" destination="CYg-fl-5gA" id="NX1-Vw-Jct"/>
                         <outlet property="puzzleContainerView" destination="LeM-3t-EW0" id="zeK-VS-msL"/>
                     </connections>
                 </viewController>
