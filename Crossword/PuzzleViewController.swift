@@ -52,12 +52,25 @@ class PuzzleViewController: UIViewController {
         
         createGrid(with: recognizer)
         //createClues()
+        let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
+        let mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        mainLabel.tag = -3
+        cellNumberArray = Array(repeating: Array(repeating: mainLabel, count: dimensions), count: dimensions)
+        
+        for j in 0..<dimensions {
+            for i in 0..<dimensions {
+                cellNumberArray[i][j] = UILabel(frame: CGRect(x: CGFloat(i)*cellWidth + 0.7, y: CGFloat(j)*cellWidth + 0.5, width: cellWidth, height: cellWidth/4))
+                cellNumberArray[i][j].font = cellNumberArray[i][j].font.withSize(5.0)
+                puzzleContainerView.addSubview(cellNumberArray[i][j])
+            }
+        }
         updateNumbers()
         
         fakeTextField.delegate = self
         fakeTextField.text = BLANK_CHARACTER
         fakeTextField.autocorrectionType = .no
         fakeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
         view.addSubview(fakeTextField)
         
         
@@ -83,6 +96,9 @@ class PuzzleViewController: UIViewController {
 //
 //        scrollView.addSubview(puzzleContainerView)
         puzzleContainerView.addGestureRecognizer(recognizer)
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,23 +148,21 @@ class PuzzleViewController: UIViewController {
     
     @objc func updateNumbers() {
         
-        let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
-        let mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        mainLabel.tag = -3
-        cellNumberArray = Array(repeating: Array(repeating: mainLabel, count: dimensions), count: dimensions)
-        
         var previousCellWasBlack = false
         clueCount = 1
+        
         
         for j in 0..<dimensions {
             for i in 0..<dimensions {
                 let cell = cellsArray[i][j]
                 //print(cell.1.text)
-                let numberLabel = cellNumberArray[i][j]
-                
-                if numberLabel.tag != -3 {
-                    continue
-                }
+
+//                let numberLabel = cellNumberArray[i][j]
+//
+//                if numberLabel.tag != -3 {
+//
+//                    continue
+//                }
                 
                 if cell.0.backgroundColor == .black {
                     //print("previous cell was black")
@@ -157,21 +171,28 @@ class PuzzleViewController: UIViewController {
                 }
                 
                 
+                
                 if previousCellWasBlack || j-1 < 0 || i-1 < 0 || cellsArray[i][j-1].0.backgroundColor == .black {
-                    if let viewToBeRemoved = puzzleContainerView.viewWithTag(clueCount) {
-                        print("Removing subview")
-                        viewToBeRemoved.removeFromSuperview()
-                    }
+//                    if let viewToBeRemoved = puzzleContainerView.viewWithTag(clueCount) {
+//                        print("Removing subview")
+//                        viewToBeRemoved.removeFromSuperview()
+//                    }
                     
+                    print("setting label")
+                    //let newLabel = UILabel(frame: CGRect(x: CGFloat(i)*cellWidth + 0.7, y: CGFloat(j)*cellWidth + 0.5, width: cellWidth, height: cellWidth/4))
+                    //puzzleContainerView.addSubview(newLabel)
+                    //newLabel.text = String(clueCount)
+                    //newLabel.font = newLabel.font.withSize(5)
+                    //newLabel.tag = clueCount
+                    //cellNumberArray[i][j].removeFromSuperview()
+                    cellNumberArray[i][j].text = ""
+                    cellNumberArray[i][j].text = String(clueCount)
+                    cellNumberArray[i][j].tag = clueCount
                     
-                    
-                    let newLabel = UILabel(frame: CGRect(x: CGFloat(i)*cellWidth + 0.7, y: CGFloat(j)*cellWidth + 0.5, width: cellWidth, height: cellWidth/4))
-                    puzzleContainerView.addSubview(newLabel)
-                    newLabel.text = String(clueCount)
-                    newLabel.font = newLabel.font.withSize(5)
-                    newLabel.tag = clueCount
-
-                    cellNumberArray[i][j] = newLabel
+//                    cellNumberArray[i][j].frame = CGRect(x: CGFloat(i)*cellWidth + 0.7, y: CGFloat(j)*cellWidth + 0.5, width: cellWidth, height: cellWidth/4)
+//                    cellNumberArray[i][j].setNeedsLayout()
+//                    cellNumberArray[i][j].layoutIfNeeded()
+                    //cellNumberArray[i][j] = newLabel
                     var currentClue: Clue?
                     for clue in clues {
                         if clue.clueNumber == clueCount {
@@ -182,14 +203,14 @@ class PuzzleViewController: UIViewController {
         
                     if (previousCellWasBlack || i-1 < 0) && (j-1 < 0 || cellsArray[i][j-1].0.backgroundColor == .black) {
                         //Both Horizontal and Vertical: Two Clues
-                        print("Horizontal and Vertical Clue?", terminator: "")
+                        //print("Horizontal and Vertical Clue? ", terminator: "\n")
                         //Check if previous clue already exists at position, if not:
                         
                         
                         
                     } else if previousCellWasBlack || i-1 < 0 {
                         //Horizontal Clue Only
-                        print("Horizontal Clue?", terminator: "")
+                        //print("Horizontal Clue? ", terminator: "\n")
                         //Check if previous clue already exists at position
                         
                         if let existingClue = currentClue {
@@ -199,7 +220,7 @@ class PuzzleViewController: UIViewController {
                         
                     } else {
                         //Vertical Clue Only
-                        print("Vertical Clue?", terminator: "")
+                        //print("Vertical Clue?\n")
                         //Check if previous clue already exists at position
                         
                     }
@@ -208,6 +229,8 @@ class PuzzleViewController: UIViewController {
                     clueCount += 1
                     previousCellWasBlack = false
                     continue
+                } else {
+                    cellNumberArray[i][j].text = ""
                 }
                 
                 
