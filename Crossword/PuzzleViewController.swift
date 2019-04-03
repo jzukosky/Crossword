@@ -51,7 +51,7 @@ class PuzzleViewController: UIViewController {
                                                 action:#selector(handleTap(recognizer:)))
         
         createGrid(with: recognizer)
-        createClues()
+        //createClues()
         updateNumbers()
         
         fakeTextField.delegate = self
@@ -60,24 +60,29 @@ class PuzzleViewController: UIViewController {
         fakeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         view.addSubview(fakeTextField)
         
-        scrollView = UIScrollView()
-        view.addSubview(scrollView)
-        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0.0).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0.0).isActive = true
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: scrollView, attribute: .width, multiplier: 1, constant: 0))
+        
+        /* SCROLL VIEW CHANGES */
+        
+//        scrollView = UIScrollView(frame: view.bounds)
+//        scrollView = UIScrollView()
+//        view.addSubview(scrollView)
+//        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0.0).isActive = true
+//        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0).isActive = true
+//        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0.0).isActive = true
+//        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: scrollView, attribute: .width, multiplier: 1, constant: 0))
 
         //scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0).isActive = true
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addGestureRecognizer(recognizer)
-        scrollView.contentSize = puzzleContainerView.bounds.size
-        
-        scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 3.0
-        scrollView.delegate = self
-        
-        scrollView.addSubview(puzzleContainerView)
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        scrollView.addGestureRecognizer(recognizer)
+//        scrollView.contentSize = puzzleContainerView.bounds.size
+//
+//        scrollView.minimumZoomScale = 1.0
+//        scrollView.maximumZoomScale = 3.0
+//        scrollView.delegate = self
+//
+//        scrollView.addSubview(puzzleContainerView)
+        puzzleContainerView.addGestureRecognizer(recognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,10 +125,10 @@ class PuzzleViewController: UIViewController {
         }
     }
     
-    func createClues() {
-        let tempClue = Clue.init(startingLocation: nil, clueNumber: -1, orientation: .horizontal, clue: nil, answer: nil)
-        clues = Array(repeating: tempClue, count: dimensions*dimensions)
-    }
+//    func createClues() {
+//        let tempClue = Clue.init(startingLocation: nil, clueNumber: -1, orientation: .horizontal, clue: nil, answer: nil)
+//        clues = Array(repeating: tempClue, count: dimensions*dimensions)
+//    }
     
     @objc func updateNumbers() {
         
