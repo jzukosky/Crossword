@@ -34,7 +34,10 @@ class PuzzleViewController: UIViewController {
     
     var cellsArray = [[(UIView,UILabel)]]()
     var cellNumberArray = [[UILabel]]()
+    var clues = [Clue]()
     var dimensions = 0
+    
+    var clueCount = 1
     
 
     override func viewDidLoad() {
@@ -48,7 +51,8 @@ class PuzzleViewController: UIViewController {
                                                 action:#selector(handleTap(recognizer:)))
         
         createGrid(with: recognizer)
-        
+        createClues()
+        updateNumbers()
         
         fakeTextField.delegate = self
         fakeTextField.text = BLANK_CHARACTER
@@ -56,18 +60,24 @@ class PuzzleViewController: UIViewController {
         fakeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         view.addSubview(fakeTextField)
         
-        scrollView = UIScrollView(frame: view.bounds)
+        scrollView = UIScrollView()
+        view.addSubview(scrollView)
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0.0).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0.0).isActive = true
+        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: scrollView, attribute: .width, multiplier: 1, constant: 0))
+
+        //scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0).isActive = true
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addGestureRecognizer(recognizer)
         scrollView.contentSize = puzzleContainerView.bounds.size
-        //scrollView.backgroundColor = UIColor.lightGray
+        
         scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 4.0
+        scrollView.maximumZoomScale = 3.0
         scrollView.delegate = self
         
         scrollView.addSubview(puzzleContainerView)
-        view.addSubview(scrollView)
-        
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,23 +111,18 @@ class PuzzleViewController: UIViewController {
                 puzzleContainerView.addSubview(textLabel)
                 textLabel.textAlignment = .center
                 textLabel.text = BLANK_CHARACTER
-                //textLabel.text = String(cellCount)
-                
-                letterView.tag = cellCount
-                textLabel.tag = cellCount + LABEL_TAG_CONSTANT
-                
                 textLabel.font = textLabel.font.withSize(9)
                 letterView.layer.borderWidth = 0.2
                 letterView.layer.borderColor = UIColor.black.cgColor
                 
                 cellsArray[i][j] = (letterView, textLabel)
-                
-                
-                
             }
         }
-        
-        //puzzleContainerView.addGestureRecognizer(recognizer)
+    }
+    
+    func createClues() {
+        let tempClue = Clue.init(startingLocation: nil, clueNumber: -1, orientation: .horizontal, clue: nil, answer: nil)
+        clues = Array(repeating: tempClue, count: dimensions*dimensions)
     }
     
     @objc func updateNumbers() {
@@ -128,7 +133,7 @@ class PuzzleViewController: UIViewController {
         cellNumberArray = Array(repeating: Array(repeating: mainLabel, count: dimensions), count: dimensions)
         
         var previousCellWasBlack = false
-        var count = 1
+        clueCount = 1
         
         for j in 0..<dimensions {
             for i in 0..<dimensions {
@@ -148,31 +153,63 @@ class PuzzleViewController: UIViewController {
                 
                 
                 if previousCellWasBlack || j-1 < 0 || i-1 < 0 || cellsArray[i][j-1].0.backgroundColor == .black {
-                    //print("adding number \(count)")
+                    if let viewToBeRemoved = puzzleContainerView.viewWithTag(clueCount) {
+                        print("Removing subview")
+                        viewToBeRemoved.removeFromSuperview()
+                    }
+                    
+                    
+                    
                     let newLabel = UILabel(frame: CGRect(x: CGFloat(i)*cellWidth + 0.7, y: CGFloat(j)*cellWidth + 0.5, width: cellWidth, height: cellWidth/4))
-                    self.view.addSubview(newLabel)
-//                    puzzleContainerView.addSubview(newLabel)
-                    //let newLabel = UILabel(frame: CGRect(x: 0.7, y: 0.7, width: cellWidth, height: cellWidth/4))
-                    newLabel.text = String(count)
-                    newLabel.textAlignment = .center
-                    print(newLabel.text)
+                    puzzleContainerView.addSubview(newLabel)
+                    newLabel.text = String(clueCount)
                     newLabel.font = newLabel.font.withSize(5)
-                    //newLabel.backgroundColor = .red
-                    
-                    //cell.0.addSubview(newLabel)
+                    newLabel.tag = clueCount
+
                     cellNumberArray[i][j] = newLabel
+                    var currentClue: Clue?
+                    for clue in clues {
+                        if clue.clueNumber == clueCount {
+                            currentClue = clue
+                            break
+                        }
+                    }
+        
+                    if (previousCellWasBlack || i-1 < 0) && (j-1 < 0 || cellsArray[i][j-1].0.backgroundColor == .black) {
+                        //Both Horizontal and Vertical: Two Clues
+                        print("Horizontal and Vertical Clue?", terminator: "")
+                        //Check if previous clue already exists at position, if not:
+                        
+                        
+                        
+                    } else if previousCellWasBlack || i-1 < 0 {
+                        //Horizontal Clue Only
+                        print("Horizontal Clue?", terminator: "")
+                        //Check if previous clue already exists at position
+                        
+                        if let existingClue = currentClue {
+                            
+                        }
+                        
+                        
+                    } else {
+                        //Vertical Clue Only
+                        print("Vertical Clue?", terminator: "")
+                        //Check if previous clue already exists at position
+                        
+                    }
                     
-                    //cell.1.text = String(count)
                     
-                    count += 1
+                    clueCount += 1
                     previousCellWasBlack = false
                     continue
                 }
                 
                 
             }
-            //print()
         }
+        
+        print(clues)
     }
     
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
@@ -196,7 +233,6 @@ class PuzzleViewController: UIViewController {
                 }
             }
         } else {
-            // unhighlightRows()
             let cellView = cellsArray[i][j]
             if cellView.0.backgroundColor != .black {
                 cellView.1.text = "\u{200B}"
@@ -339,10 +375,6 @@ class PuzzleViewController: UIViewController {
     
     func unhighlightRows() {
         
-        if blocking {
-            cellsArray[currentCoords.0][currentCoords.1].0.backgroundColor = .white
-        }
-        
         if !horizontal {
             for x in 0...dimensions-1 {
                 let cell = cellsArray[currentHighlightedColumn][x]
@@ -409,9 +441,13 @@ extension PuzzleViewController: UITextFieldDelegate {
                 print(char)
                 moveCellandLabel(to: newCoords)
             } else {
-                print("Backspace was pressed")
-                label.text = ""
-                moveCellandLabel(to: deiterateCoords(currentI: currentCoords.0, currentJ: currentCoords.1))
+                if let text = label.text {
+                    if text == BLANK_CHARACTER || text.isEmpty {
+                        moveCellandLabel(to: deiterateCoords(currentI: currentCoords.0, currentJ: currentCoords.1))
+                    } else {
+                        label.text = ""
+                    }
+                }
             }
         }
         
@@ -429,10 +465,11 @@ extension PuzzleViewController {
         
         numberToolbar.barStyle = .default
         numberToolbar.items = [
+            UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goToPreviousClue)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             UIBarButtonItem(title: "Block", style: .plain, target: self, action: #selector(toggleBlocking)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Swap", style: .plain, target: self, action: #selector(toggleDirection)),
-            UIBarButtonItem(title: "Nums", style: .plain, target: self, action: #selector(updateNumbers))]
+            UIBarButtonItem(title: "Forward", style: .plain, target: self, action: #selector(goToNextClue))]
         numberToolbar.sizeToFit()
         fakeTextField.inputAccessoryView = nil
         fakeTextField.inputAccessoryView = numberToolbar
@@ -447,10 +484,19 @@ extension PuzzleViewController {
         blocking = !blocking
         if blocking {
             unhighlightRows()
-            numberToolbar.items?[0].title = "Done"
+            cellsArray[currentCoords.0][currentCoords.1].0.backgroundColor = .white
+            numberToolbar.items?[2].title = "Done"
         } else {
-            numberToolbar.items?[0].title = "Block"
+            numberToolbar.items?[2].title = "Block"
         }
+    }
+    
+    @objc func goToPreviousClue() {
+        
+    }
+    
+    @objc func goToNextClue() {
+        
     }
 }
 

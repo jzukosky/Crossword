@@ -14,7 +14,7 @@
 		83451AA321C8508B00C418F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83451AA221C8508B00C418F5 /* Assets.xcassets */; };
 		83451AA621C8508B00C418F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83451AA421C8508B00C418F5 /* LaunchScreen.storyboard */; };
 		83451AAE21C8518B00C418F5 /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83451AAD21C8518B00C418F5 /* PuzzleViewController.swift */; };
-		83451AB021C8537100C418F5 /* PuzzleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83451AAF21C8537100C418F5 /* PuzzleCollectionViewCell.swift */; };
+		8348051E21CC4C1F004E77BD /* Clue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348051D21CC4C1F004E77BD /* Clue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		83451AA521C8508B00C418F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83451AA721C8508B00C418F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83451AAD21C8518B00C418F5 /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
-		83451AAF21C8537100C418F5 /* PuzzleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewCell.swift; sourceTree = "<group>"; };
+		8348051D21CC4C1F004E77BD /* Clue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +63,8 @@
 				83451A9821C8508800C418F5 /* AppDelegate.swift */,
 				83451A9A21C8508800C418F5 /* ViewController.swift */,
 				83451A9C21C8508800C418F5 /* Main.storyboard */,
-				83451AAF21C8537100C418F5 /* PuzzleCollectionViewCell.swift */,
 				83451AAD21C8518B00C418F5 /* PuzzleViewController.swift */,
+				8348051D21CC4C1F004E77BD /* Clue.swift */,
 				83451AA221C8508B00C418F5 /* Assets.xcassets */,
 				83451AA421C8508B00C418F5 /* LaunchScreen.storyboard */,
 				83451AA721C8508B00C418F5 /* Info.plist */,
@@ -145,8 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				83451A9B21C8508800C418F5 /* ViewController.swift in Sources */,
-				83451AB021C8537100C418F5 /* PuzzleCollectionViewCell.swift in Sources */,
 				83451A9921C8508800C418F5 /* AppDelegate.swift in Sources */,
+				8348051E21CC4C1F004E77BD /* Clue.swift in Sources */,
 				83451AAE21C8518B00C418F5 /* PuzzleViewController.swift in Sources */,
 				83451AA121C8508800C418F5 /* Crossword.xcdatamodeld in Sources */,
 			);
