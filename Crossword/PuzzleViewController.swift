@@ -59,7 +59,8 @@ class PuzzleViewController: UIViewController {
         
         createGrid(with: recognizer)
         //createClues()
-        let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
+       // let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
+        let cellWidth = UIScreen.main.bounds.width / CGFloat(dimensions)
         let mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         mainLabel.tag = -3
         cellNumberArray = Array(repeating: Array(repeating: mainLabel, count: dimensions), count: dimensions)
@@ -116,7 +117,8 @@ class PuzzleViewController: UIViewController {
     
     
     func createGrid(with recognizer: UITapGestureRecognizer) {
-        let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
+        // let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
+        let cellWidth = UIScreen.main.bounds.width / CGFloat(dimensions)
         var cellCount = 0
         
         let mainView = UIView()
@@ -139,7 +141,7 @@ class PuzzleViewController: UIViewController {
                 puzzleContainerView.addSubview(textLabel)
                 textLabel.textAlignment = .center
                 textLabel.text = BLANK_CHARACTER
-                textLabel.font = textLabel.font.withSize(9)
+                textLabel.font = textLabel.font.withSize(cellWidth/3)
                 letterView.layer.borderWidth = 0.2
                 letterView.layer.borderColor = UIColor.black.cgColor
                 

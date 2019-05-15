@@ -1,0 +1,16 @@
+Primary Features
+
+Grid
+-Default letter squares
+-Can place "blockers"
+	- Automatically place rotationally symmetric blockers
+-automatically determine across and down numbers
+-variable dimensions
+
+
+Other
+-implement datamuse api for oneLook search
+	-http://www.datamuse.com/api/
+
+
+uqf4Qd!R
