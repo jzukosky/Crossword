@@ -6,6 +6,13 @@
 //  Copyright © 2018 Zukosky, Jonah. All rights reserved.
 //
 
+
+
+
+//TODO: each time you enter in a letter, it saves to core data
+//TODO: publish button to finalize
+
+
 import UIKit
 
 class PuzzleViewController: UIViewController {

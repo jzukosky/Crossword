@@ -15,8 +15,8 @@
 		83451AA621C8508B00C418F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83451AA421C8508B00C418F5 /* LaunchScreen.storyboard */; };
 		83451AAE21C8518B00C418F5 /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83451AAD21C8518B00C418F5 /* PuzzleViewController.swift */; };
 		8348051E21CC4C1F004E77BD /* Clue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348051D21CC4C1F004E77BD /* Clue.swift */; };
-		E2AE1E91228B69A300A4BB9E /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE1E8F228B69A300A4BB9E /* Word+CoreDataClass.swift */; };
-		E2AE1E92228B69A300A4BB9E /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE1E90228B69A300A4BB9E /* Word+CoreDataProperties.swift */; };
+		E272BC36228CB0D900229A99 /* Crossword+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E272BC34228CB0D900229A99 /* Crossword+CoreDataClass.swift */; };
+		E272BC37228CB0D900229A99 /* Crossword+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E272BC35228CB0D900229A99 /* Crossword+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +30,8 @@
 		83451AA721C8508B00C418F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83451AAD21C8518B00C418F5 /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		8348051D21CC4C1F004E77BD /* Clue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clue.swift; sourceTree = "<group>"; };
-		E2AE1E8F228B69A300A4BB9E /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E2AE1E90228B69A300A4BB9E /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E272BC34228CB0D900229A99 /* Crossword+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crossword+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E272BC35228CB0D900229A99 /* Crossword+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crossword+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,19 +64,27 @@
 		83451A9721C8508800C418F5 /* Crossword */ = {
 			isa = PBXGroup;
 			children = (
+				E272BC33228CAC8900229A99 /* Model */,
 				83451A9821C8508800C418F5 /* AppDelegate.swift */,
 				83451A9A21C8508800C418F5 /* ViewController.swift */,
 				83451A9C21C8508800C418F5 /* Main.storyboard */,
+				E272BC34228CB0D900229A99 /* Crossword+CoreDataClass.swift */,
+				E272BC35228CB0D900229A99 /* Crossword+CoreDataProperties.swift */,
 				83451AAD21C8518B00C418F5 /* PuzzleViewController.swift */,
 				8348051D21CC4C1F004E77BD /* Clue.swift */,
 				83451AA221C8508B00C418F5 /* Assets.xcassets */,
 				83451AA421C8508B00C418F5 /* LaunchScreen.storyboard */,
 				83451AA721C8508B00C418F5 /* Info.plist */,
 				83451A9F21C8508800C418F5 /* Crossword.xcdatamodeld */,
-				E2AE1E8F228B69A300A4BB9E /* Word+CoreDataClass.swift */,
-				E2AE1E90228B69A300A4BB9E /* Word+CoreDataProperties.swift */,
 			);
 			path = Crossword;
+			sourceTree = "<group>";
+		};
+		E272BC33228CAC8900229A99 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,10 +159,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				83451A9B21C8508800C418F5 /* ViewController.swift in Sources */,
+				E272BC36228CB0D900229A99 /* Crossword+CoreDataClass.swift in Sources */,
 				83451A9921C8508800C418F5 /* AppDelegate.swift in Sources */,
-				E2AE1E92228B69A300A4BB9E /* Word+CoreDataProperties.swift in Sources */,
+				E272BC37228CB0D900229A99 /* Crossword+CoreDataProperties.swift in Sources */,
 				8348051E21CC4C1F004E77BD /* Clue.swift in Sources */,
-				E2AE1E91228B69A300A4BB9E /* Word+CoreDataClass.swift in Sources */,
 				83451AAE21C8518B00C418F5 /* PuzzleViewController.swift in Sources */,
 				83451AA121C8508800C418F5 /* Crossword.xcdatamodeld in Sources */,
 			);
