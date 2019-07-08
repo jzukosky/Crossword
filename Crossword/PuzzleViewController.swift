@@ -108,7 +108,12 @@ class PuzzleViewController: UIViewController {
     }
     
     
-    
+    /*
+        Creates the actual ui for the grid.
+        It does this by creating a 2d array of Tuples,
+        each consisting of a View (The background of the cell), and a Label (The Letter)
+        This is all stored in a global cellsArray variable.
+     */
     func createGrid(with recognizer: UITapGestureRecognizer) {
         // let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
         let cellWidth = UIScreen.main.bounds.width / CGFloat(dimensions)
@@ -148,6 +153,9 @@ class PuzzleViewController: UIViewController {
 //        clues = Array(repeating: tempClue, count: dimensions*dimensions)
 //    }
     
+    /*
+     
+     */
     @objc func updateNumbers() {
         
         var previousCellWasBlack = false
@@ -242,6 +250,17 @@ class PuzzleViewController: UIViewController {
         print(clues)
     }
     
+    /*
+        Handles Taps on Cells
+         - First gets location of tap on screen
+            - Gets the cell number from location using some weird math
+         - 2 Branches: If blocking is on or off
+            - if blocking:
+                - Get cell from cellsArray, swap the color, and update numbers
+            - if not blocking:
+                - Checks if cell is already selected. If so, swaps the direction
+                - If not selected, selects the cell and updates highlighted colors (the blue)
+     */
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: puzzleContainerView)
         
@@ -280,6 +299,11 @@ class PuzzleViewController: UIViewController {
         
     }
     
+    
+    /*
+        Handles adding block to match the user added one
+        to satisfy rotational symmetry. Should be made optional eventually
+     */
     func addRotationalSymmetry(_ i: Int,_ j: Int) {
         let inverseCellView = cellsArray[dimensions-1-i][dimensions-1-j]
         print(i,j)
@@ -298,17 +322,26 @@ class PuzzleViewController: UIViewController {
         }
     }
     
+    /*
+        Handles logic for placing the blue selector on the grid.
+        Checks to see if the cell is a block, if so doesn't place.
+        Then resets the previous cell (sometimes you have to skip over a block)
+        to the correct color.
+     
+        updates global variables and highlights the rows.
+     
+     */
     func updateCell(to newCell: (Int,Int),from lastSelectedCell: (Int,Int)) {
         
         if cellsArray[newCell.0][newCell.1].0.backgroundColor != .black {
             if horizontal {
-                if newCell.1 == currentCoords.1 && cellsArray[lastSelectedCell.0][lastSelectedCell.1].0.backgroundColor != .black{
+                if newCell.1 == currentCoords.1 && cellsArray[lastSelectedCell.0][lastSelectedCell.1].0.backgroundColor != .black {
                     cellsArray[lastSelectedCell.0][lastSelectedCell.1].0.backgroundColor = .yellow
                 } else {
                     highlightRows()
                 }
             } else {
-                if newCell.0 == currentCoords.0 && cellsArray[lastSelectedCell.0][lastSelectedCell.1].0.backgroundColor != .black{
+                if newCell.0 == currentCoords.0 && cellsArray[lastSelectedCell.0][lastSelectedCell.1].0.backgroundColor != .black {
                     cellsArray[lastSelectedCell.0][lastSelectedCell.1].0.backgroundColor = .yellow
                 } else {
                     highlightRows()
@@ -331,7 +364,12 @@ class PuzzleViewController: UIViewController {
 
     }
     
-    
+    /*
+        Handles calling updateCell from the keyboard via backspace.
+        Specifically checks to see if we need to skip cell(s) to get
+        to a valid location for the selector. Calls itself recursively
+        if it encounters a block that it needs to move over. Then updates cells
+     */
     func moveCellandLabel(to newCoords: (Int,Int)) {
         let newCell = cellsArray[newCoords.0][newCoords.1]
         
@@ -339,6 +377,7 @@ class PuzzleViewController: UIViewController {
             if cellsArray[currentCoords.0][currentCoords.1].0.backgroundColor != .black {
                 cellsArray[currentCoords.0][currentCoords.1].0.backgroundColor = .white
             }
+            
             let newerCoords = iterateCoords(currentI: newCoords.0,currentJ: newCoords.1)
             currentCoords = newCoords
 
@@ -349,6 +388,13 @@ class PuzzleViewController: UIViewController {
         }
     }
     
+    /*
+        Helper function for moveCellandLabel. Handles moving coords to next cell
+        because the logic around wrapping lines got lengthy.
+     
+        Basically checks to see if we're at the end of a line and need to move to
+        the next row/column
+     */
     func iterateCoords(currentI: Int, currentJ: Int) -> (Int,Int) {
         let currentX = currentI
         let currentY = currentJ
@@ -377,6 +423,11 @@ class PuzzleViewController: UIViewController {
         
     }
     
+    /*
+        Wow this is the exact same as iterateCoords thats dumb Jonah
+        This should be consolidated into iterateCoords and there should
+        be a flag paramter added to determine if we're iterating or deiterating.
+     */
     func deiterateCoords(currentI: Int, currentJ: Int) -> (Int,Int) {
         let currentX = currentI
         let currentY = currentJ
@@ -403,6 +454,10 @@ class PuzzleViewController: UIViewController {
         
     }
     
+    /*
+        Unhighlights all the yellow.
+        Does so by getting the current column/row and iterating through it resetting colors
+     */
     func unhighlightRows() {
         
         if !horizontal {
@@ -422,6 +477,9 @@ class PuzzleViewController: UIViewController {
         }
     }
     
+    /*
+        Unhighlights previous row, then highlights current row
+     */
     func highlightRows() {
         unhighlightRows()
         let i = currentCoords.0
@@ -451,11 +509,17 @@ class PuzzleViewController: UIViewController {
 
 extension PuzzleViewController: UITextFieldDelegate {
     
+    /*
+        This is a weird requirement to basically make sure that labels are the correct size when "empty"
+     */
     @objc func textFieldDidChange(_ textField: UITextField) {
         print("textFieldDidChange")
         textField.text = BLANK_CHARACTER
     }
     
+    /*
+        Changes Letter text and iterates the cell selector.
+     */
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         textField.text = BLANK_CHARACTER
         
@@ -491,6 +555,10 @@ extension PuzzleViewController: UITextFieldDelegate {
 //MARK: - Keyboard Toolbar
 extension PuzzleViewController {
     
+    /*
+        Creates the UI for the toolbar above the keyboard.
+        This should eventually be more flushed out/have some stuff removed to go elsewhere
+     */
     func createToolbar() {
         
         numberToolbar.barStyle = .default
@@ -505,11 +573,20 @@ extension PuzzleViewController {
         fakeTextField.inputAccessoryView = numberToolbar
     }
     
+    /*
+        idk why this is an @objc func but it toggles the direction
+        when the currently selected cell is selected again.
+     */
     @objc func toggleDirection() {
         unhighlightRows()
         horizontal = !horizontal
         highlightRows()
     }
+    
+    /*
+        Handles the blocking button in the toolbar.
+        Basically changes a flag and resets cell colors.
+     */
     @objc func toggleBlocking() {
         blocking = !blocking
         if blocking {
@@ -522,26 +599,38 @@ extension PuzzleViewController {
     }
     
     @objc func goToPreviousClue() {
-        
+        // TODO: Implement
     }
     
     @objc func goToNextClue() {
-        
+        // TODO: Implement
     }
 }
 
-
+/*
+    None of this is getting used rn cause the scroll view is FUCKY
+ */
 extension PuzzleViewController: UIScrollViewDelegate {
+    
+    /*
+     
+     */
     @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
         scrollView.setZoomScale(1.0, animated: true)
     }
     
+    /*
+     
+     */
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         print("viewForZoomingIn")
 
         return self.puzzleContainerView
     }
     
+    /*
+     
+     */
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         print("scrollViewDidZoom")
         if scrollView.zoomScale < 1.0 {
