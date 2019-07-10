@@ -27,7 +27,7 @@ public class Crossword: NSManagedObject {
         self.clue = clue
     }
     
-    func update(title: String, stringsArray: ValueTransformer, clue: ValueTransformer){
-        <#function body#>
-    }
+    //func update(title: String, stringsArray: ValueTransformer, clue: ValueTransformer){
+    //
+    //}
 }

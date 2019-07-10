@@ -105,6 +105,9 @@ class PuzzleViewController: UIViewController {
 //        scrollView.addSubview(puzzleContainerView)
         puzzleContainerView.addGestureRecognizer(recognizer)
         
+        for item in cellsArray {
+            print("Found \(item)")
+        }
         
         
     }
