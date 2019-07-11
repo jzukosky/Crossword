@@ -14,7 +14,7 @@ import CoreData
 public class Crossword: NSManagedObject {
     
     
-    convenience init?(title: String, clue: ValueTransformer, stringsArray: ValueTransformer) {
+    convenience init?(title: String, clue: [NSString], stringsArray: [NSString]) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         
         guard let managedContext = appDelegate?.persistentContainer.viewContext

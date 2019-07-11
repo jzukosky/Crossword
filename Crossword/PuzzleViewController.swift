@@ -28,6 +28,9 @@ class PuzzleViewController: UIViewController {
     
     @IBOutlet weak var puzzleContainerView: UIView!
     @IBOutlet weak var containerContainerView: UIView!
+    
+    @IBOutlet weak var navigationTitleTextField: UINavigationItem!
+    
     var scrollView: UIScrollView!
     
     let fakeTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -40,11 +43,17 @@ class PuzzleViewController: UIViewController {
     
     
     var cellsArray = [[(UIView,UILabel)]]()
+    var crossword: Crossword?
+    
     var cellNumberArray = [[UILabel]]()
     var clues = [Clue]()
     var dimensions = 0
     
     var clueCount = 1
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+
     
 
     override func viewDidLoad() {
@@ -104,12 +113,6 @@ class PuzzleViewController: UIViewController {
 //
 //        scrollView.addSubview(puzzleContainerView)
         puzzleContainerView.addGestureRecognizer(recognizer)
-        
-        for item in cellsArray {
-            print("Found \(item)")
-        }
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -514,6 +517,39 @@ class PuzzleViewController: UIViewController {
         }
         
     }
+    
+    
+    //MARK: - Saving to Core Data
+    
+    
+    //Dale Musser https://github.com/TechInnovator
+    func alertNotifyUser(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func savePuzzle(_ sender: Any) {
+        
+        for item in cellsArray {
+            print("Found \(item)")
+        }
+        
+        guard let title = navigationTitleTextField.title?.trimmingCharacters(in: .whitespaces), !title.isEmpty else {
+            alertNotifyUser(message: "Please enter a title before saving your puzzle.")
+            return
+        }
+        
+        if let crossword = crossword {
+            crossword.title = title
+            crossword.clue = NSNull
+            crossword.stringsArray = cellsArray
+        } else {
+            crossword = Crossword(title: title, clue: NSNull, stringsArray: cellsArray)
+        }
+        
+    }
+    
 
 }
 
@@ -560,8 +596,6 @@ extension PuzzleViewController: UITextFieldDelegate {
     }
     
 }
-
-
 //MARK: - Keyboard Toolbar
 extension PuzzleViewController {
     

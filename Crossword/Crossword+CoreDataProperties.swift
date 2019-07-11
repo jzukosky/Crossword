@@ -17,8 +17,8 @@ extension Crossword {
         return NSFetchRequest<Crossword>(entityName: "Crossword")
     }
 
-    @NSManaged public var stringsArray: ValueTransformer?
+    @NSManaged public var stringsArray: [NSString]?
     @NSManaged public var title: String?
-    @NSManaged public var clue: ValueTransformer?
+    @NSManaged public var clue: [NSString]?
 
 }
