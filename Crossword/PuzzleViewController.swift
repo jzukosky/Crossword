@@ -14,6 +14,7 @@
 
 
 import UIKit
+import CoreData
 
 class PuzzleViewController: UIViewController {
 
@@ -52,6 +53,12 @@ class PuzzleViewController: UIViewController {
     var clueCount = 1
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
+    //Anything between these comments is for getting saving to work only, not saving the crossword itself.
+        
+    
+    //
     
 
     
@@ -519,7 +526,7 @@ class PuzzleViewController: UIViewController {
     }
     
     
-    //MARK: - Saving to Core Data
+    //MARK: - Core Data
     
     
     //Dale Musser https://github.com/TechInnovator
@@ -542,14 +549,17 @@ class PuzzleViewController: UIViewController {
         
         if let crossword = crossword {
             crossword.title = title
-            crossword.clue = NSNull
+            crossword.clue = clues
             crossword.stringsArray = cellsArray
         } else {
-            crossword = Crossword(title: title, clue: NSNull, stringsArray: cellsArray)
+            crossword = Crossword(title: title, clue: clues, stringsArray: cellsArray)
         }
         
     }
-    
+
+    func convertPuzzleForCoreData() {
+        
+    }
 
 }
 
