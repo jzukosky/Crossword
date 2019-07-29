@@ -2,7 +2,7 @@
 //  Crossword+CoreDataProperties.swift
 //  Crossword
 //
-//  Created by Brendan Krekeler on 5/15/19.
+//  Created by Brendan Krekeler on 7/28/19.
 //  Copyright © 2019 Zukosky, Jonah. All rights reserved.
 //
 //
@@ -17,8 +17,8 @@ extension Crossword {
         return NSFetchRequest<Crossword>(entityName: "Crossword")
     }
 
+    @NSManaged public var clue: [NSString]?
     @NSManaged public var stringsArray: [NSString]?
     @NSManaged public var title: String?
-    @NSManaged public var clue: [NSString]?
 
 }

@@ -133,6 +133,8 @@ class PuzzleViewController: UIViewController {
         It does this by creating a 2d array of Tuples,
         each consisting of a View (The background of the cell), and a Label (The Letter)
         This is all stored in a global cellsArray variable.
+     
+        Do I have to have to make a change to the custom class in Core Data?
      */
     func createGrid(with recognizer: UITapGestureRecognizer) {
         // let cellWidth = puzzleContainerView.frame.width / CGFloat(dimensions)
@@ -549,7 +551,7 @@ class PuzzleViewController: UIViewController {
         
         if let crossword = crossword {
             crossword.title = title
-            crossword.clue = clues
+            crossword!.
             crossword.stringsArray = cellsArray
         } else {
             crossword = Crossword(title: title, clue: clues, stringsArray: cellsArray)

@@ -13,7 +13,7 @@ import CoreData
 @objc(Crossword)
 public class Crossword: NSManagedObject {
     
-    convenience init?(title: String?, clue: [NSCoder], stringsArray: [NSCoder]) {
+    convenience init?(title: String?, clue: [NSString], stringsArray: [NSString]) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         
         guard let managedContext = appDelegate?.persistentContainer.viewContext
@@ -26,7 +26,7 @@ public class Crossword: NSManagedObject {
         self.clue = clue
     }
     
-    func update(title: String?, stringsArray: [NSCoder], clue: [NSCoder]){
+    func update(title: String?, stringsArray: [NSString], clue: [NSString]){
         self.title = title
         self.stringsArray = stringsArray
         self.clue = clue
