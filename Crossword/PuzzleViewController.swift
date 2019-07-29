@@ -9,7 +9,6 @@
 
 
 
-//TODO: each time you enter in a letter, it saves to core data
 //TODO: publish button to finalize
 
 
