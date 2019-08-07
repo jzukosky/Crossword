@@ -20,22 +20,34 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="puzzleCell" textLabel="p3Q-IE-uZz" style="IBUITableViewCellStyleDefault" id="DNt-1G-XGM" userLabel="crosswordCell">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="crosswordCell" rowHeight="86" id="3jn-ut-77h" customClass="CrosswordTableViewCell" customModule="Crossword" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DNt-1G-XGM" id="5e3-wy-3GP">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3jn-ut-77h" id="JW2-bO-wqu">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p3Q-IE-uZz">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.666667938232422"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0Q-OU-v4h">
+                                                    <rect key="frame" x="20" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yr-dG-NJt">
+                                                    <rect key="frame" x="20" y="45" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="crosswordCell"/>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="1Yr-dG-NJt" id="uRI-e9-rc5"/>
+                                            <outlet property="titleLabel" destination="r0Q-OU-v4h" id="O3R-Qh-A0a"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -66,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959.20000000000005" y="133.5832083958021"/>
+            <point key="canvasLocation" x="957.97101449275374" y="133.25892857142856"/>
         </scene>
         <!--Title-->
         <scene sceneID="mqe-y7-916">
@@ -97,14 +109,13 @@
                     <navigationItem key="navigationItem" title="Title" id="CZE-E0-Ote">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="avb-n4-5pl">
                             <connections>
-                                <action selector="savePuzzle:" destination="5PU-E9-1tp" id="AGg-ub-mRR"/>
+                                <action selector="savePuzzle:" destination="5PU-E9-1tp" id="TLg-Ob-nWu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="navigationTitleTextField" destination="CZE-E0-Ote" id="oN5-HJ-qyS"/>
                         <outlet property="puzzleContainerView" destination="LeM-3t-EW0" id="zeK-VS-msL"/>
-                        <outlet property="saveButton" destination="avb-n4-5pl" id="N0z-Du-Msr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46o-8n-VM8" userLabel="First Responder" sceneMemberID="firstResponder"/>

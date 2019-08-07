@@ -42,7 +42,7 @@ class PuzzleViewController: UIViewController {
     var lastSelectedView = UIView()
     
     
-    var cellsArray = [[(UIView,UILabel)]]()
+    var cellsArray = [[(background: UIView, letter: UILabel)]]()
     var crossword: Crossword?
     
     var cellNumberArray = [[UILabel]]()
@@ -54,17 +54,8 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     
-    //Anything between these comments is for getting saving to work only, not saving the crossword itself.
-        
-    
-    //
-    
-
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: Make this variable?
         dimensions = 15
         createToolbar()
         
@@ -539,29 +530,33 @@ class PuzzleViewController: UIViewController {
     
     @IBAction func savePuzzle(_ sender: Any) {
         
-        for item in cellsArray {
-            print("Found \(item)")
-        }
-        
         guard let title = navigationTitleTextField.title?.trimmingCharacters(in: .whitespaces), !title.isEmpty else {
             alertNotifyUser(message: "Please enter a title before saving your puzzle.")
             return
         }
         
-        if let crossword = crossword {
+        /*if let crossword = crossword {
             crossword.title = title
             crossword!.
             crossword.stringsArray = cellsArray
         } else {
             crossword = Crossword(title: title, clue: clues, stringsArray: cellsArray)
         }
+       */
+        
+        convertPuzzleForCoreData(crosswordArrays: cellsArray)
         
     }
+    
 
-    func convertPuzzleForCoreData() {
+    func convertPuzzleForCoreData( crosswordArrays: [[(background: UIView, letter: UILabel)]]) {
         
+        var key, y: Int
+        for i in 0..<crosswordArrays.count {
+            print(crosswordArrays[i])
+        }
     }
-
+    
 }
 
 extension PuzzleViewController: UITextFieldDelegate {

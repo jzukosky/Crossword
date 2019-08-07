@@ -80,7 +80,7 @@ extension CrosswordsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return crosswords.count 
         
         //when core data begins working this should change to below, because if it were to be added now then there would be no way to access the puzzleview controller
         
@@ -89,8 +89,12 @@ extension CrosswordsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "crosswordCell")!
-        cell.textLabel?.text = "Crossword???"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "crosswordCell", for: indexPath)
+        if let cell = cell as? CrosswordTableViewCell {
+            let crossword = crosswords[indexPath.row]
+            cell.titleLabel.text = crossword.title
+            cell.dateLabel.text = "This is the Date"
+        }
         
         return cell
     }
